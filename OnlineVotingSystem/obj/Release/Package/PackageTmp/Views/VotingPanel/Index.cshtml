@@ -1,0 +1,222 @@
+﻿@model IEnumerable<OnlineVotingSystem.ViewModel.VoteCastingPanelViewModel>
+
+@{
+    ViewBag.Title = "Vote Casting Panel";
+}
+
+<h2>Vote Casting Panel</h2>
+
+@{
+    int count = 1, countR = 0;
+}
+
+<div class="container">
+    
+    <div class="Vote">
+
+        <h4 style="margin-top: 10px; color:red">You Have to Cast Your Valuable Vote for All Positions.</h4>
+
+        @if (Model != null && Model.Any())
+        {
+            foreach (var group in Model.GroupBy(item => item.Position))
+            {
+                <div class="BlockP" style="border: 1px solid #bdbdbd; width: 100%; border-radius: 4px; margin-top: 40px; background-color: #f0ffff; padding: 8px;">
+                    <div class="Position" style="padding: 2%;">
+                        <span class="label label-warning"> @string.Format("{0}{1}.", "POSITION ", count)</span>
+                        <span id="@string.Format("{0}{1}", "ID_P", count)" style="display:none;">@Html.Encode(group.Key.PositionId)</span>
+                        <p style="display: inline; padding: 2%; font-size:x-large" id="@string.Format("{0}{1}", "POSITION", count)">@Html.Encode(group.Key.PositionName)</p>
+                    </div>
+                    <div class="Choices" style="margin-left: 8%; margin-bottom: 4%;">
+                        @foreach (var item in group)
+                        {
+
+                            if ((item.Position.PositionName == "Vice President"))
+                            {
+                                @*<label>Please Select Any Five Candidate</label><br />*@
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="@string.Format("{0}{1}", "inlineOptions", count)" id="@string.Format("{0}{1}", "inlineCheck", countR)" value="@Html.Encode(item.Candidate.CandidateId)" style="margin-left: -16px;">@Html.Encode(item.Candidate.Name) &nbsp;&nbsp;&nbsp; @Html.Encode(item.Candidate.ServiceId)   &nbsp; &nbsp; &nbsp;
+                                </label>
+                                <img src="@Url.Content(item.Candidate.PhotoPath)" width="75" height="75" />
+                                <br /><br/>
+                                countR++;
+
+                            }
+                            else
+                            {
+                                <label class="radio-inline">
+                                    <input type="radio" name="@string.Format("{0}{1}", "inlineOptions", count)" id="@string.Format("{0}{1}", "inlineRadio", countR)" value="@Html.Encode(item.Candidate.CandidateId)" style="margin-left: -16px;">@Html.Encode(item.Candidate.Name) &nbsp;&nbsp;&nbsp; @Html.Encode(item.Candidate.ServiceId)  &nbsp; &nbsp; &nbsp;
+                                </label>
+                                <img src="@Url.Content(item.Candidate.PhotoPath)" width="75" height="75" />
+                                <br /><br/>
+                                countR++;
+                            }
+                        }
+                    </div> <!--END Choices-->
+                </div> <!-- END BlockP -->
+                count++;
+            }
+            <br /><br />
+            if (Session["userEmail"] != null && Session["userType"] != null)
+            {
+                <button type="button" id="" class="btn btn-danger" style="margin-top: 10px;">Cast Your Vote</button>
+                <br /><br />
+            }
+            else
+            {
+                <button type="button" id="castVote" class="btn btn-danger" style="margin-top: 10px;">Cast Your Vote</button>
+                <br /><br />
+                <div id="@string.Format("{0}", "Message")">
+
+                </div>
+
+                <div id="@string.Format("{0}", "Warning")">
+
+                </div>
+            }
+
+        }
+    </div> <!-- END POSITION -->
+</div> <!-- END CONTAINER -->
+
+@section MyScritps
+{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('#castVote').on('click', function () {
+                var result = [];                
+                var position = {};
+
+                var total1 = 0; 
+                var total2 = 0;  
+                var total3 = 0;
+                var total4 = 0;  
+                var total5 = 0;
+                var total6 = 0; 
+                var total7 = 0;
+                var total8 = 0;
+                var total9 = 0;                
+               
+
+                for (var i = 1; i <= 9; i++) {
+                    $.each($('input[name=inlineOptions' + i + ']:checked'), function () {                        
+                        if (i == 1) {
+                            total1 = total1 + 1;
+                        }
+                        if (i == 2) {
+                            total2 = total2 + 1;                           
+                        }
+                        if (i == 3) {
+                            total3 = total3 + 1;
+                        }
+                        if (i == 4) {
+                            total4 = total4 + 1;
+                        }
+                        if (i == 5) {
+                            total5 = total5 + 1;
+                        }
+                        if (i == 6) {
+                            total6 = total6 + 1;
+                        }
+                        if (i == 7) {
+                            total7 = total7 + 1;
+                        }
+                        if (i == 8) {
+                            total8 = total8 + 1;
+                        }
+                        if (i == 9) {
+                            total9 = total9 + 1;
+                        }
+                        
+
+                        position = {
+                            PositionId: $('#ID_P' + i).text(),
+                            CandidateId: $(this).val()
+                        }
+                        result.push(position);
+                    })                   
+                }
+
+                if (total1 != 1) {
+                    $('#Warning').html('<div class="alert alert-danger" role="alert">You Have to Vote for President Position</div>');
+                    return;
+                }
+
+                if (total2 > 5) {
+                    $('#Warning').html('<div class="alert alert-danger" role="alert">You Are Allowed to Vote Maximum 5 Candidates for Vice President Position</div>');
+                    return;
+                }
+                if (total2 != 5) {
+                    $('#Warning').html('<div class="alert alert-danger" role="alert">You Have to Vote 5 Candidates for Vice President Position</div>');
+                    return;
+                }
+
+                if (total3 != 1) {
+                    $('#Warning').html('<div class="alert alert-danger" role="alert">You Have to Vote for General Secretary Position</div>');
+                    return;
+                }
+
+                if (total4 != 1) {
+                    $('#Warning').html('<div class="alert alert-danger" role="alert">You Have to Vote for Assistant Treasurer Position</div>');
+                    return;
+                }
+
+                if (total5 != 1) {
+                    $('#Warning').html('<div class="alert alert-danger" role="alert">You Have to Vote for Organizing Secretary Position</div>');
+                    return;
+                }
+
+                if (total6 != 1) {
+                    $('#Warning').html('<div class="alert alert-danger" role="alert">You Have to Vote for Welfare Secretary Position</div>');
+                    return;
+                }
+
+                if (total7 != 1) {
+                    $('#Warning').html('<div class="alert alert-danger" role="alert">You Have to Vote for Publication and Publicity Secretary Position</div>');
+                    return;
+                  
+                }
+
+
+                if (total8 != 1) {
+                    $('#Warning').html('<div class="alert alert-danger" role="alert">You Have to Vote for ICT Secretary Position</div>');
+                    return;
+                }
+
+
+                if (total9 != 1) {
+                    $('#Warning').html('<div class="alert alert-danger" role="alert">You Have to Vote for Research and Development Secretary Position</div>');
+                    return;
+                }                
+               
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("VoteCast", "VotingPanel")',
+                    data: { result },
+
+                    success: function (response) {
+                        //alert(response)
+                        if (response.success == true)
+                        {
+                            $('#Message').html('<div class="alert alert-success" role="alert">You Have Cast Your Vote Successfully. Thank you.</div>');    
+                            $("#castVote").hide();
+                            $("#Warning").hide();
+                        }
+                        else
+                        {
+                            $('#Message').html('<div class="alert alert-danger" role="alert">Vote Casting Failed.</div>');     
+                            $("#castVote").show();
+                        }                        
+                    },
+                    error: function (response) {
+
+                    }
+                });
+            });
+        });
+
+    </script>
+}
+
+

@@ -1,0 +1,8 @@
+﻿@{
+    ViewBag.Title = "Home";
+    if (Session["userEmail"] == null && Session["userType"] == null)
+    {
+        Response.Redirect("~/Login/Index");
+    }
+}
+<h2>Home</h2>

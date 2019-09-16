@@ -1,0 +1,61 @@
+﻿@model IEnumerable<OnlineVotingSystem.Models.Candidate>
+
+@{
+    ViewBag.Title = "Candidate List";
+    if (Session["userEmail"] == null && Session["userType"] == null)
+    {
+        Response.Redirect("~/Login/Index");
+    }
+}
+
+<h2>Candidate List</h2>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table class="table">
+    <tr>        
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ServiceId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MobileNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhotoPath)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>        
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ServiceId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MobileNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            <img src="@Url.Content(item.PhotoPath)" width="75" height="75" />
+        </td>
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CandidateId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CandidateId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CandidateId })
+        </td>*@
+    </tr>
+}
+
+</table>

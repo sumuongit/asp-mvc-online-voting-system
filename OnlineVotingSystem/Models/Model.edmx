@@ -1,0 +1,486 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Finix.OnlineVotingSystem.DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Candidate">
+          <Key>
+            <PropertyRef Name="CandidateId" />
+          </Key>
+          <Property Name="CandidateId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="ServiceId" Type="nvarchar" MaxLength="50" />
+          <Property Name="Designation" Type="nvarchar" MaxLength="100" />
+          <Property Name="WorkPlace" Type="nvarchar" MaxLength="250" />
+          <Property Name="MobileNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="PhotoPath" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CandidatePosition">
+          <Key>
+            <PropertyRef Name="CandidatePositionId" />
+          </Key>
+          <Property Name="CandidatePositionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CandidateId" Type="int" />
+          <Property Name="PositionId" Type="int" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="PositionId" />
+          </Key>
+          <Property Name="PositionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PositionName" Type="nvarchar" MaxLength="250" />
+          <Property Name="NumberOfPost" Type="int" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleType" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="ServiceId" Type="nvarchar" MaxLength="50" />
+          <Property Name="MobileNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="RoleId" Type="int" />
+        </EntityType>
+        <EntityType Name="VoteCastingInformation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CandidateId" Type="int" />
+          <Property Name="VoterId" Type="int" />
+          <Property Name="PositionId" Type="int" />
+        </EntityType>
+        <EntityType Name="Voter">
+          <Key>
+            <PropertyRef Name="VoterId" />
+          </Key>
+          <Property Name="VoterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="ServiceId" Type="nvarchar" MaxLength="50" />
+          <Property Name="MobileNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="BloodGroup" Type="nvarchar" MaxLength="25" />
+          <Property Name="IsSelected" Type="bit" />
+          <Property Name="IsCommittedVote" Type="bit" Nullable="false" />
+          <Property Name="UniqueIdentification" Type="uniqueidentifier" />
+          <Property Name="IsMailSent" Type="bit" />
+        </EntityType>
+        <Association Name="FK_CandidatePosition_Candidate">
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="0..1" />
+          <End Role="CandidatePosition" Type="Self.CandidatePosition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidate">
+              <PropertyRef Name="CandidateId" />
+            </Principal>
+            <Dependent Role="CandidatePosition">
+              <PropertyRef Name="CandidateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CandidatePosition_Position">
+          <End Role="Position" Type="Self.Position" Multiplicity="0..1" />
+          <End Role="CandidatePosition" Type="Self.CandidatePosition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="PositionId" />
+            </Principal>
+            <Dependent Role="CandidatePosition">
+              <PropertyRef Name="PositionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VoteCastingInformation_Candidate">
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="0..1" />
+          <End Role="VoteCastingInformation" Type="Self.VoteCastingInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidate">
+              <PropertyRef Name="CandidateId" />
+            </Principal>
+            <Dependent Role="VoteCastingInformation">
+              <PropertyRef Name="CandidateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VoteCastingInformation_Position">
+          <End Role="Position" Type="Self.Position" Multiplicity="0..1" />
+          <End Role="VoteCastingInformation" Type="Self.VoteCastingInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="PositionId" />
+            </Principal>
+            <Dependent Role="VoteCastingInformation">
+              <PropertyRef Name="PositionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VoteCastingInformation_Voter">
+          <End Role="Voter" Type="Self.Voter" Multiplicity="0..1" />
+          <End Role="VoteCastingInformation" Type="Self.VoteCastingInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Voter">
+              <PropertyRef Name="VoterId" />
+            </Principal>
+            <Dependent Role="VoteCastingInformation">
+              <PropertyRef Name="VoterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FinixOnlineVotingSystemDatabaseModelStoreContainer">
+          <EntitySet Name="Candidate" EntityType="Self.Candidate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CandidatePosition" EntityType="Self.CandidatePosition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Position" EntityType="Self.Position" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VoteCastingInformation" EntityType="Self.VoteCastingInformation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Voter" EntityType="Self.Voter" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CandidatePosition_Candidate" Association="Self.FK_CandidatePosition_Candidate">
+            <End Role="Candidate" EntitySet="Candidate" />
+            <End Role="CandidatePosition" EntitySet="CandidatePosition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CandidatePosition_Position" Association="Self.FK_CandidatePosition_Position">
+            <End Role="Position" EntitySet="Position" />
+            <End Role="CandidatePosition" EntitySet="CandidatePosition" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VoteCastingInformation_Candidate" Association="Self.FK_VoteCastingInformation_Candidate">
+            <End Role="Candidate" EntitySet="Candidate" />
+            <End Role="VoteCastingInformation" EntitySet="VoteCastingInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VoteCastingInformation_Position" Association="Self.FK_VoteCastingInformation_Position">
+            <End Role="Position" EntitySet="Position" />
+            <End Role="VoteCastingInformation" EntitySet="VoteCastingInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VoteCastingInformation_Voter" Association="Self.FK_VoteCastingInformation_Voter">
+            <End Role="Voter" EntitySet="Voter" />
+            <End Role="VoteCastingInformation" EntitySet="VoteCastingInformation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Finix.OnlineVotingSystem.DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Candidate">
+          <Key>
+            <PropertyRef Name="CandidateId" />
+          </Key>
+          <Property Name="CandidateId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ServiceId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Designation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="WorkPlace" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="MobileNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhotoPath" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CandidatePositions" Relationship="Self.FK_CandidatePosition_Candidate" FromRole="Candidate" ToRole="CandidatePosition" />
+          <NavigationProperty Name="VoteCastingInformations" Relationship="Self.FK_VoteCastingInformation_Candidate" FromRole="Candidate" ToRole="VoteCastingInformation" />
+        </EntityType>
+        <EntityType Name="CandidatePosition">
+          <Key>
+            <PropertyRef Name="CandidatePositionId" />
+          </Key>
+          <Property Name="CandidatePositionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CandidateId" Type="Int32" />
+          <Property Name="PositionId" Type="Int32" />
+          <NavigationProperty Name="Candidate" Relationship="Self.FK_CandidatePosition_Candidate" FromRole="CandidatePosition" ToRole="Candidate" />
+          <NavigationProperty Name="Position" Relationship="Self.FK_CandidatePosition_Position" FromRole="CandidatePosition" ToRole="Position" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="PositionId" />
+          </Key>
+          <Property Name="PositionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PositionName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="NumberOfPost" Type="Int32" />
+          <NavigationProperty Name="CandidatePositions" Relationship="Self.FK_CandidatePosition_Position" FromRole="Position" ToRole="CandidatePosition" />
+          <NavigationProperty Name="VoteCastingInformations" Relationship="Self.FK_VoteCastingInformation_Position" FromRole="Position" ToRole="VoteCastingInformation" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_User_Role" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ServiceId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MobileNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RoleId" Type="Int32" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_User_Role" FromRole="User" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="VoteCastingInformation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CandidateId" Type="Int32" />
+          <Property Name="VoterId" Type="Int32" />
+          <Property Name="PositionId" Type="Int32" />
+          <NavigationProperty Name="Candidate" Relationship="Self.FK_VoteCastingInformation_Candidate" FromRole="VoteCastingInformation" ToRole="Candidate" />
+          <NavigationProperty Name="Position" Relationship="Self.FK_VoteCastingInformation_Position" FromRole="VoteCastingInformation" ToRole="Position" />
+          <NavigationProperty Name="Voter" Relationship="Self.FK_VoteCastingInformation_Voter" FromRole="VoteCastingInformation" ToRole="Voter" />
+        </EntityType>
+        <EntityType Name="Voter">
+          <Key>
+            <PropertyRef Name="VoterId" />
+          </Key>
+          <Property Name="VoterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ServiceId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MobileNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BloodGroup" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="IsSelected" Type="Boolean" />
+          <Property Name="IsCommittedVote" Type="Boolean" Nullable="false" />
+          <Property Name="UniqueIdentification" Type="Guid" />
+          <NavigationProperty Name="VoteCastingInformations" Relationship="Self.FK_VoteCastingInformation_Voter" FromRole="Voter" ToRole="VoteCastingInformation" />
+          <Property Name="IsMailSent" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK_CandidatePosition_Candidate">
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="0..1" />
+          <End Role="CandidatePosition" Type="Self.CandidatePosition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidate">
+              <PropertyRef Name="CandidateId" />
+            </Principal>
+            <Dependent Role="CandidatePosition">
+              <PropertyRef Name="CandidateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VoteCastingInformation_Candidate">
+          <End Role="Candidate" Type="Self.Candidate" Multiplicity="0..1" />
+          <End Role="VoteCastingInformation" Type="Self.VoteCastingInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Candidate">
+              <PropertyRef Name="CandidateId" />
+            </Principal>
+            <Dependent Role="VoteCastingInformation">
+              <PropertyRef Name="CandidateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CandidatePosition_Position">
+          <End Role="Position" Type="Self.Position" Multiplicity="0..1" />
+          <End Role="CandidatePosition" Type="Self.CandidatePosition" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="PositionId" />
+            </Principal>
+            <Dependent Role="CandidatePosition">
+              <PropertyRef Name="PositionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VoteCastingInformation_Position">
+          <End Role="Position" Type="Self.Position" Multiplicity="0..1" />
+          <End Role="VoteCastingInformation" Type="Self.VoteCastingInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="PositionId" />
+            </Principal>
+            <Dependent Role="VoteCastingInformation">
+              <PropertyRef Name="PositionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VoteCastingInformation_Voter">
+          <End Role="Voter" Type="Self.Voter" Multiplicity="0..1" />
+          <End Role="VoteCastingInformation" Type="Self.VoteCastingInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Voter">
+              <PropertyRef Name="VoterId" />
+            </Principal>
+            <Dependent Role="VoteCastingInformation">
+              <PropertyRef Name="VoterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OnlineVotingSystemDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Candidates" EntityType="Self.Candidate" />
+          <EntitySet Name="CandidatePositions" EntityType="Self.CandidatePosition" />
+          <EntitySet Name="Positions" EntityType="Self.Position" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="VoteCastingInformations" EntityType="Self.VoteCastingInformation" />
+          <EntitySet Name="Voters" EntityType="Self.Voter" />
+          <AssociationSet Name="FK_CandidatePosition_Candidate" Association="Self.FK_CandidatePosition_Candidate">
+            <End Role="Candidate" EntitySet="Candidates" />
+            <End Role="CandidatePosition" EntitySet="CandidatePositions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VoteCastingInformation_Candidate" Association="Self.FK_VoteCastingInformation_Candidate">
+            <End Role="Candidate" EntitySet="Candidates" />
+            <End Role="VoteCastingInformation" EntitySet="VoteCastingInformations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CandidatePosition_Position" Association="Self.FK_CandidatePosition_Position">
+            <End Role="Position" EntitySet="Positions" />
+            <End Role="CandidatePosition" EntitySet="CandidatePositions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VoteCastingInformation_Position" Association="Self.FK_VoteCastingInformation_Position">
+            <End Role="Position" EntitySet="Positions" />
+            <End Role="VoteCastingInformation" EntitySet="VoteCastingInformations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VoteCastingInformation_Voter" Association="Self.FK_VoteCastingInformation_Voter">
+            <End Role="Voter" EntitySet="Voters" />
+            <End Role="VoteCastingInformation" EntitySet="VoteCastingInformations" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FinixOnlineVotingSystemDatabaseModelStoreContainer" CdmEntityContainer="OnlineVotingSystemDBEntities">
+          <EntitySetMapping Name="Candidates">
+            <EntityTypeMapping TypeName="Finix.OnlineVotingSystem.DatabaseModel.Candidate">
+              <MappingFragment StoreEntitySet="Candidate">
+                <ScalarProperty Name="CandidateId" ColumnName="CandidateId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+                <ScalarProperty Name="Designation" ColumnName="Designation" />
+                <ScalarProperty Name="WorkPlace" ColumnName="WorkPlace" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhotoPath" ColumnName="PhotoPath" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CandidatePositions">
+            <EntityTypeMapping TypeName="Finix.OnlineVotingSystem.DatabaseModel.CandidatePosition">
+              <MappingFragment StoreEntitySet="CandidatePosition">
+                <ScalarProperty Name="CandidatePositionId" ColumnName="CandidatePositionId" />
+                <ScalarProperty Name="CandidateId" ColumnName="CandidateId" />
+                <ScalarProperty Name="PositionId" ColumnName="PositionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Positions">
+            <EntityTypeMapping TypeName="Finix.OnlineVotingSystem.DatabaseModel.Position">
+              <MappingFragment StoreEntitySet="Position">
+                <ScalarProperty Name="PositionId" ColumnName="PositionId" />
+                <ScalarProperty Name="PositionName" ColumnName="PositionName" />
+                <ScalarProperty Name="NumberOfPost" ColumnName="NumberOfPost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="Finix.OnlineVotingSystem.DatabaseModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleType" ColumnName="RoleType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Finix.OnlineVotingSystem.DatabaseModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VoteCastingInformations">
+            <EntityTypeMapping TypeName="Finix.OnlineVotingSystem.DatabaseModel.VoteCastingInformation">
+              <MappingFragment StoreEntitySet="VoteCastingInformation">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CandidateId" ColumnName="CandidateId" />
+                <ScalarProperty Name="VoterId" ColumnName="VoterId" />
+                <ScalarProperty Name="PositionId" ColumnName="PositionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Voters">
+            <EntityTypeMapping TypeName="Finix.OnlineVotingSystem.DatabaseModel.Voter">
+              <MappingFragment StoreEntitySet="Voter">
+                <ScalarProperty Name="IsMailSent" ColumnName="IsMailSent" />
+                <ScalarProperty Name="VoterId" ColumnName="VoterId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="BloodGroup" ColumnName="BloodGroup" />
+                <ScalarProperty Name="IsSelected" ColumnName="IsSelected" />
+                <ScalarProperty Name="IsCommittedVote" ColumnName="IsCommittedVote" />
+                <ScalarProperty Name="UniqueIdentification" ColumnName="UniqueIdentification" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,140 @@
+﻿@model  OnlineVotingSystem.ViewModel.VoteCastingInformationViewModel
+
+@{
+    ViewBag.Title = "Voting Result";
+    if (Session["userEmail"] == null && Session["userType"] == null)
+    {
+        Response.Redirect("~/Login/Index");
+    }
+}
+
+<h2>Voting Result</h2>
+
+<h2 style="color:red">Position Wise Candidate's Obtained Vote</h2>
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <table class="table">
+                <tr>
+                    <th>Position</th>
+                    <th>Candidate</th>
+                    @*<th>No. of Vote Obtanied</th>*@
+                </tr>
+
+                @foreach (var group in Model.CandidateVoterViewModel.GroupBy(item => item.Position))
+                {
+                    <tr>
+                        <td>
+                            @Html.Encode(group.Key.PositionName)
+                        </td>
+
+                        <td>                            
+                            @foreach (var item in group)
+                            {
+                            <table>
+                                <tr>
+                                    <td style="border:none">
+                                        @Html.Encode(item.Candidate.Name) <br />
+                                    </td>
+                                    <td style="border:none">
+                                        @Html.Encode(item.VoteCount) <br />
+                                    </td>
+                                </tr>
+                            </table>
+                            }
+                        </td>  
+                        
+                        @*<td>
+                            @group.Count()
+                        </td>*@
+                    </tr>
+                }
+
+            </table>
+        </div>
+        @*<div class="col-sm">
+            <table class="table">
+                <tr>
+                    <th>Position</th>
+                    <th>Candidate</th>
+                    <th>No. of Vote Obtained</th>
+                </tr>
+
+                @foreach (var item in Model.CandidateVoterViewModel)
+                {
+                <tr>
+                    <td>
+                        @Html.Encode(item.PositionName)
+                    </td>
+                    <td>
+                        @Html.Encode(item.CandidateName)
+                    </td>
+                    <td>
+                        @Html.Encode(item.VoteCount)
+                    </td>
+                </tr>
+                }
+
+            </table>
+        </div>*@        
+    </div>
+</div>
+
+
+
+
+<h3 style="color:red">The Voters Who Are Not Commited Vote</h3>
+
+<table class="table">
+    <tr>
+        <th>
+            Voter Name
+        </th>
+        <th>
+            Service Id
+        </th>
+        <th>
+            Mobile Number
+        </th>
+        <th>
+            Email Id
+        </th>
+        <th>
+            Blood Group
+        </th>
+        <th>
+            Committed Vote?
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Voters)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServiceId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MobileNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BloodGroup)
+            </td>
+            <td>
+                @((bool)item.IsCommittedVote ? "Yes" : "No")
+            </td>
+        </tr>
+    }
+
+</table>
+

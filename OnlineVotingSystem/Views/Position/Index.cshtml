@@ -1,0 +1,44 @@
+﻿@model IEnumerable<OnlineVotingSystem.Models.Position>
+
+@{
+    ViewBag.Title = "Position List";
+    if (Session["userEmail"] == null && Session["userType"] == null)
+    {
+        Response.Redirect("~/Login/Index");
+    }
+}
+
+<h2>Position List</h2>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PositionName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumberOfPost)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PositionName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumberOfPost)
+        </td>
+
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PositionId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PositionId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PositionId })
+        </td>*@
+    </tr>
+}
+
+</table>
