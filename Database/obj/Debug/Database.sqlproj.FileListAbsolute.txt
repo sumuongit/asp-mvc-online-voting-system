@@ -1,0 +1,10 @@
+D:\MyGitHubRepos\OnlineVotingSystem\Database\bin\Debug\Database.dacpac
+D:\MyGitHubRepos\OnlineVotingSystem\Database\bin\Debug\Database.dll
+D:\MyGitHubRepos\OnlineVotingSystem\Database\bin\Debug\Database.pdb
+D:\MyGitHubRepos\OnlineVotingSystem\Database\obj\Debug\Database.sqlprojAssemblyReference.cache
+D:\MyGitHubRepos\OnlineVotingSystem\Database\obj\Debug\Model.xml
+D:\MyGitHubRepos\OnlineVotingSystem\Database\obj\Debug\refactor.xml
+D:\MyGitHubRepos\OnlineVotingSystem\Database\obj\Debug\postdeploy.sql
+D:\MyGitHubRepos\OnlineVotingSystem\Database\obj\Debug\predeploy.sql
+D:\MyGitHubRepos\OnlineVotingSystem\Database\obj\Debug\Database.dll
+D:\MyGitHubRepos\OnlineVotingSystem\Database\obj\Debug\Database.pdb
