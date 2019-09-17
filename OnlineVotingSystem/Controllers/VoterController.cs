@@ -71,7 +71,7 @@ namespace OnlineVotingSystem.Controllers
 
                 var fromEmail = new MailAddress("bcs24batch@logicbd.org", "Online Voting!!");
                 var toEmail = new MailAddress(voterObject.Email);
-                var fromEmailPassword = "B24b#123%";
+                var fromEmailPassword = "********";
                 string subject = "Executive Committee Election of 24 th BCS Association 2019";
 
                 string body = "<br/><br/>Executive Committee Election of 24 th BCS (Admin) Association 2019" +
@@ -120,7 +120,7 @@ namespace OnlineVotingSystem.Controllers
                 //        "Link: " + url + "\r\n " +
                 //        "If you have any problem in accessing the link please visit your email to find this link.";
                 //    String to = voterObject.MobileNo; //Recipient Phone Number multiple number must be separated by comma
-                //    String token = "41b9a5c4a1063abae96083b72edf6925"; //generate token from the control panel
+                //    String token = "********"; //generate token from the control panel
                 //    String message = System.Uri.EscapeUriString(smsText); //do not use single quotation (') in the message to avoid forbidden result
                 //    String urlSms = "http://api.greenweb.com.bd/api.php?token=" + token + "&to=" + to + "&message=" + message;
                 //    request = WebRequest.Create(urlSms);
