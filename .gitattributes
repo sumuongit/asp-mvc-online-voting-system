@@ -10,9 +10,8 @@ OnlineVotingSystem/Controllers/* linguist-language=ASP
 # Include the following files or folders for language detection
 *.sql linguist-detectable=false
 
-*.ps1 linguist-vendored=false
-*.ps linguist-vendored=false
-*.sql linguist-vendored=false
+*.ps1 linguist-vendored
+*.sql linguist-vendored=true
 
 # Auto detect text files and perform LF normalization
 * text=auto
