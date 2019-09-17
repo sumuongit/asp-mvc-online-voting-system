@@ -1,6 +1,7 @@
 # Exclude the following files or folders from language statistics
 OnlineVotingSystem/Content/* linguist-vendored
 OnlineVotingSystem/Scripts/* linguist-vendored
+Database/* linguist-vendored
 
 # Include the following files or folders for language renaming
 OnlineVotingSystem/Models/* linguist-language=ASP
@@ -8,8 +9,7 @@ OnlineVotingSystem/Views/* linguist-language=ASP
 OnlineVotingSystem/Controllers/* linguist-language=ASP
 
 # Include the following files or folders for language detection
-*.sql linguist-detectable=true
-*.ps1 linguist-language=C#
+#*.sql linguist-detectable=true
 
 # Auto detect text files and perform LF normalization
 * text=auto
