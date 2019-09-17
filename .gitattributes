@@ -1,10 +1,9 @@
 # Exclude the following files or folders from language statistics
 OnlineVotingSystem/Content/* linguist-vendored
 OnlineVotingSystem/Scripts/* linguist-vendored
-OnlineVotingSystem/UploadedFiles/* linguist-vendored
 
 # Include the following files or folders for language renaming
-#OnlineVotingSystem/Models/* linguist-language=CSHARP
+OnlineVotingSystem/Models/* linguist-language=CSHARP
 OnlineVotingSystem/Views/* linguist-language=ASP
 OnlineVotingSystem/Controllers/* linguist-language=CSHARP
 OnlineVotingSystem/ViewModel/* linguist-language=CSHARP
