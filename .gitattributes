@@ -3,9 +3,9 @@ OnlineVotingSystem/Content/* linguist-vendored
 OnlineVotingSystem/Scripts/* linguist-vendored
 
 # Include the following files or folders for language renaming
-OnlineVotingSystem/Models/* linguist-language=C#
+OnlineVotingSystem/Models/* linguist-language=CSHARP
 OnlineVotingSystem/Views/* linguist-language=ASP
-OnlineVotingSystem/Controllers/* linguist-language=C#
+OnlineVotingSystem/Controllers/* linguist-language=CSHARP
 
 # Include the following files or folders for language detection
 *.sql linguist-detectable=true
