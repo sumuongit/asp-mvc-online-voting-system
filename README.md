@@ -1,5 +1,6 @@
 ## Table of Contents
 * [General Info](#general-info)
+* [Features](#features)
 * [Database Scripts](#database-scripts)
 * [Technologies](#technologies)
 * [Setup](#setup)
@@ -8,6 +9,9 @@
 
 ## General Info
 An Online Voting System
+
+## Features
+* Candidate List
 
 ## Database Scripts
 [Database Scripts](https://github.com/sumuongit/asp-mvc-online-voting-system/tree/master/OnlineVotingSystem/Database)
