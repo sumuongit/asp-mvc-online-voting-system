@@ -13,6 +13,7 @@ An Online Voting System
 ## Features
 * Candidate List
 * Voter List
+* Vote Casting Panel
 
 ## Database Scripts
 [Database Scripts](https://github.com/sumuongit/asp-mvc-online-voting-system/tree/master/OnlineVotingSystem/Database)
