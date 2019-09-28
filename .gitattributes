@@ -11,7 +11,7 @@ OnlineVotingSystem/ViewModel/* linguist-language=CSHARP
 OnlineVotingSystem/Database/* linguist-language=SQL
 
 # Include the following files or folders for language detection
-*.sql linguist-detectable=false
+#*.sql linguist-detectable=false
 
 # Auto detect text files and perform LF normalization
 * text=auto
