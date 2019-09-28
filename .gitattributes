@@ -1,7 +1,6 @@
 # Exclude the following files or folders from language statistics
 OnlineVotingSystem/Content/* linguist-vendored
 OnlineVotingSystem/Scripts/* linguist-vendored
-Database/dbo/Tables/* linguist-vendored
 
 # Include the following files or folders for language renaming
 OnlineVotingSystem/Models/* linguist-language=CSHARP
@@ -11,7 +10,6 @@ OnlineVotingSystem/ViewModel/* linguist-language=CSHARP
 
 # Include the following files or folders for language detection
 *.sql linguist-detectable=true
-*.sql linguist-language=sql
 
 # Auto detect text files and perform LF normalization
 * text=auto
