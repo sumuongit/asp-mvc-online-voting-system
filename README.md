@@ -12,6 +12,7 @@ An Online Voting System
 
 ## Features
 * Candidate List
+* Position List
 * Voter List
 * Vote Casting Panel
 * Voting Result
