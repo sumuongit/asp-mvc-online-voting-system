@@ -8,7 +8,7 @@
 * [License](#license)
 
 ## General Info
-An Online Voting System
+An online voting system using ASP.NET MVC 5, Entity Framework (Database First Approach) and SQL Server 2014
 
 ## Features
 * Candidate List
