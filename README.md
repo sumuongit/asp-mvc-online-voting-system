@@ -10,7 +10,7 @@
 ## General Info
 An online voting system using ASP.NET MVC 5, Entity Framework (Database First Approach) and SQL Server 2014
 
-Some snapshots (each of them are partially shown) of the Online Voting System are given below:
+Some snapshots (Partially Shown) of the Online Voting System are given below:
 
 **Position Wise Candidate List:**<br/>
 ![Position Wise Candidate List](https://github.com/sumuongit/asp-mvc-online-voting-system/blob/master/OnlineVotingSystem/Images/candidate_list.png)
