@@ -12,16 +12,16 @@ An online voting system using ASP.NET MVC 5, Entity Framework (Database First Ap
 
 Some snapshots (each of them are partially shown) of the Online Voting System are given below:
 
-**Position Wise Candidate List**<br/>
+**Position Wise Candidate List:**<br/>
 ![Position Wise Candidate List](https://github.com/sumuongit/asp-mvc-online-voting-system/blob/master/OnlineVotingSystem/Images/candidate_list.png)
 
-**Voter List**<br/>
+**Voter List:**<br/>
 ![Voter List](https://github.com/sumuongit/asp-mvc-online-voting-system/blob/master/OnlineVotingSystem/Images/list_of_voter.png)
 
-**Vote Casting Panel**<br/>
+**Vote Casting Panel:**<br/>
 ![Vote Casting Panel](https://github.com/sumuongit/asp-mvc-online-voting-system/blob/master/OnlineVotingSystem/Images/casting_panel.png)
 
-**Voting Result**<br/>
+**Voting Result:**<br/>
 ![Voting Result](https://github.com/sumuongit/asp-mvc-online-voting-system/blob/master/OnlineVotingSystem/Images/result.png)
 
 ## Features
