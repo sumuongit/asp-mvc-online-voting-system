@@ -51,8 +51,8 @@
                                 countR++;
                             }
                         }
-                    </div> <!--END Choices-->
-                </div> <!-- END BlockP -->
+                    </div> 
+                </div> 
                 count++;
             }
             <br /><br />
@@ -75,8 +75,8 @@
             }
 
         }
-    </div> <!-- END POSITION -->
-</div> <!-- END CONTAINER -->
+    </div> 
+</div> 
 
 @section MyScritps
 {
@@ -96,8 +96,7 @@
                 var total6 = 0; 
                 var total7 = 0;
                 var total8 = 0;
-                var total9 = 0;                
-               
+                var total9 = 0; 
 
                 for (var i = 1; i <= 9; i++) {
                     $.each($('input[name=inlineOptions' + i + ']:checked'), function () {                        
@@ -127,8 +126,7 @@
                         }
                         if (i == 9) {
                             total9 = total9 + 1;
-                        }
-                        
+                        }                        
 
                         position = {
                             PositionId: $('#ID_P' + i).text(),
@@ -178,12 +176,10 @@
                   
                 }
 
-
                 if (total8 != 1) {
                     $('#Warning').html('<div class="alert alert-danger" role="alert">You Have to Vote for ICT Secretary Position</div>');
                     return;
                 }
-
 
                 if (total9 != 1) {
                     $('#Warning').html('<div class="alert alert-danger" role="alert">You Have to Vote for Research and Development Secretary Position</div>');

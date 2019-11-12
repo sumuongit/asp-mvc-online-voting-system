@@ -9,7 +9,6 @@ namespace OnlineVotingSystem.ViewModel
     public class VoteCastingPanelViewModel
     {
        public Candidate Candidate { get; set; }
-       public Position Position { get; set; }
-       //public Voter Voter { get; set; }
+       public Position Position { get; set; }      
     }
 }

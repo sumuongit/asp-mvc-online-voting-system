@@ -38,7 +38,7 @@ namespace OnlineVotingSystem.Controllers
                     }
 
                     string folderPath = Server.MapPath("~/UploadedFiles/");
-                    //Check Directory exists else create one
+                    //Check directory exists else create one
                     if (!Directory.Exists(folderPath))
                     {
                         Directory.CreateDirectory(folderPath);
@@ -107,6 +107,7 @@ namespace OnlineVotingSystem.Controllers
                     }
                     ViewBag.Message = "Voter Information Imported Successfully.";
                 }
+
                 //catch (Exception ex)
                 //{
                 //    ViewBag.Message = ex.Message;
@@ -153,8 +154,6 @@ namespace OnlineVotingSystem.Controllers
         }
     }
 }
-
-
 
         //[HttpPost]
         //public ActionResult Index(ImportExcelFile importExcelFile)

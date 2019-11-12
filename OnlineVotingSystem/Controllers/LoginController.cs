@@ -47,7 +47,6 @@ namespace OnlineVotingSystem.Controllers
 
         public ActionResult LogOut()
         {
-
             Session.Abandon();
             return RedirectToAction("Index", "Login");
         }

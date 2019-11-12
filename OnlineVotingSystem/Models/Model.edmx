@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Finix.OnlineVotingSystem.DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="OnlineVotingSystemDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Candidate">
           <Key>
             <PropertyRef Name="CandidateId" />
@@ -149,7 +149,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="FinixOnlineVotingSystemDatabaseModelStoreContainer">
+        <EntityContainer Name="OnlineVotingSystemDBModelStoreContainer">
           <EntitySet Name="Candidate" EntityType="Self.Candidate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CandidatePosition" EntityType="Self.CandidatePosition" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Position" EntityType="Self.Position" Schema="dbo" store:Type="Tables" />
@@ -182,10 +182,11 @@
             <End Role="VoteCastingInformation" EntitySet="VoteCastingInformation" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Finix.OnlineVotingSystem.DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="OnlineVotingSystemDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Candidate">
           <Key>
             <PropertyRef Name="CandidateId" />
@@ -267,8 +268,8 @@
           <Property Name="IsSelected" Type="Boolean" />
           <Property Name="IsCommittedVote" Type="Boolean" Nullable="false" />
           <Property Name="UniqueIdentification" Type="Guid" />
-          <NavigationProperty Name="VoteCastingInformations" Relationship="Self.FK_VoteCastingInformation_Voter" FromRole="Voter" ToRole="VoteCastingInformation" />
           <Property Name="IsMailSent" Type="Boolean" />
+          <NavigationProperty Name="VoteCastingInformations" Relationship="Self.FK_VoteCastingInformation_Voter" FromRole="Voter" ToRole="VoteCastingInformation" />
         </EntityType>
         <Association Name="FK_CandidatePosition_Candidate">
           <End Role="Candidate" Type="Self.Candidate" Multiplicity="0..1" />
@@ -380,9 +381,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="FinixOnlineVotingSystemDatabaseModelStoreContainer" CdmEntityContainer="OnlineVotingSystemDBEntities">
+        <EntityContainerMapping StorageEntityContainer="OnlineVotingSystemDBModelStoreContainer" CdmEntityContainer="OnlineVotingSystemDBEntities">
           <EntitySetMapping Name="Candidates">
-            <EntityTypeMapping TypeName="Finix.OnlineVotingSystem.DatabaseModel.Candidate">
+            <EntityTypeMapping TypeName="OnlineVotingSystemDBModel.Candidate">
               <MappingFragment StoreEntitySet="Candidate">
                 <ScalarProperty Name="CandidateId" ColumnName="CandidateId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -396,7 +397,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CandidatePositions">
-            <EntityTypeMapping TypeName="Finix.OnlineVotingSystem.DatabaseModel.CandidatePosition">
+            <EntityTypeMapping TypeName="OnlineVotingSystemDBModel.CandidatePosition">
               <MappingFragment StoreEntitySet="CandidatePosition">
                 <ScalarProperty Name="CandidatePositionId" ColumnName="CandidatePositionId" />
                 <ScalarProperty Name="CandidateId" ColumnName="CandidateId" />
@@ -405,7 +406,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Positions">
-            <EntityTypeMapping TypeName="Finix.OnlineVotingSystem.DatabaseModel.Position">
+            <EntityTypeMapping TypeName="OnlineVotingSystemDBModel.Position">
               <MappingFragment StoreEntitySet="Position">
                 <ScalarProperty Name="PositionId" ColumnName="PositionId" />
                 <ScalarProperty Name="PositionName" ColumnName="PositionName" />
@@ -414,7 +415,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Roles">
-            <EntityTypeMapping TypeName="Finix.OnlineVotingSystem.DatabaseModel.Role">
+            <EntityTypeMapping TypeName="OnlineVotingSystemDBModel.Role">
               <MappingFragment StoreEntitySet="Role">
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="RoleType" ColumnName="RoleType" />
@@ -422,7 +423,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="Finix.OnlineVotingSystem.DatabaseModel.User">
+            <EntityTypeMapping TypeName="OnlineVotingSystemDBModel.User">
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -435,7 +436,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="VoteCastingInformations">
-            <EntityTypeMapping TypeName="Finix.OnlineVotingSystem.DatabaseModel.VoteCastingInformation">
+            <EntityTypeMapping TypeName="OnlineVotingSystemDBModel.VoteCastingInformation">
               <MappingFragment StoreEntitySet="VoteCastingInformation">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CandidateId" ColumnName="CandidateId" />
@@ -445,9 +446,8 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Voters">
-            <EntityTypeMapping TypeName="Finix.OnlineVotingSystem.DatabaseModel.Voter">
+            <EntityTypeMapping TypeName="OnlineVotingSystemDBModel.Voter">
               <MappingFragment StoreEntitySet="Voter">
-                <ScalarProperty Name="IsMailSent" ColumnName="IsMailSent" />
                 <ScalarProperty Name="VoterId" ColumnName="VoterId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
@@ -457,6 +457,7 @@
                 <ScalarProperty Name="IsSelected" ColumnName="IsSelected" />
                 <ScalarProperty Name="IsCommittedVote" ColumnName="IsCommittedVote" />
                 <ScalarProperty Name="UniqueIdentification" ColumnName="UniqueIdentification" />
+                <ScalarProperty Name="IsMailSent" ColumnName="IsMailSent" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

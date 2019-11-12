@@ -4,20 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="aa209ad6c02b46cd957941a8b68fa6c9" Name="Diagram1">
-        <EntityTypeShape EntityType="Finix.OnlineVotingSystem.DatabaseModel.Candidate" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Finix.OnlineVotingSystem.DatabaseModel.CandidatePosition" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="Finix.OnlineVotingSystem.DatabaseModel.Position" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Finix.OnlineVotingSystem.DatabaseModel.Role" Width="1.5" PointX="5.75" PointY="2.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Finix.OnlineVotingSystem.DatabaseModel.User" Width="1.5" PointX="8" PointY="2.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Finix.OnlineVotingSystem.DatabaseModel.VoteCastingInformation" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Finix.OnlineVotingSystem.DatabaseModel.Voter" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
-        <AssociationConnector Association="Finix.OnlineVotingSystem.DatabaseModel.FK_CandidatePosition_Candidate" ManuallyRouted="false" />
-        <AssociationConnector Association="Finix.OnlineVotingSystem.DatabaseModel.FK_VoteCastingInformation_Candidate" ManuallyRouted="false" />
-        <AssociationConnector Association="Finix.OnlineVotingSystem.DatabaseModel.FK_CandidatePosition_Position" ManuallyRouted="false" />
-        <AssociationConnector Association="Finix.OnlineVotingSystem.DatabaseModel.FK_VoteCastingInformation_Position" ManuallyRouted="false" />
-        <AssociationConnector Association="Finix.OnlineVotingSystem.DatabaseModel.FK_User_Role" ManuallyRouted="false" />
-        <AssociationConnector Association="Finix.OnlineVotingSystem.DatabaseModel.FK_VoteCastingInformation_Voter" ManuallyRouted="false" />
+      <Diagram DiagramId="1de382db7a834dd9aa6021b2dca283b3" Name="Diagram1">
+        <EntityTypeShape EntityType="OnlineVotingSystemDBModel.Candidate" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineVotingSystemDBModel.CandidatePosition" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineVotingSystemDBModel.Position" Width="1.5" PointX="0.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineVotingSystemDBModel.Role" Width="1.5" PointX="5.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineVotingSystemDBModel.User" Width="1.5" PointX="8" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineVotingSystemDBModel.VoteCastingInformation" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineVotingSystemDBModel.Voter" Width="1.5" PointX="0.75" PointY="10.375" IsExpanded="true" />
+        <AssociationConnector Association="OnlineVotingSystemDBModel.FK_CandidatePosition_Candidate" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineVotingSystemDBModel.FK_VoteCastingInformation_Candidate" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineVotingSystemDBModel.FK_CandidatePosition_Position" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineVotingSystemDBModel.FK_VoteCastingInformation_Position" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineVotingSystemDBModel.FK_User_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineVotingSystemDBModel.FK_VoteCastingInformation_Voter" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

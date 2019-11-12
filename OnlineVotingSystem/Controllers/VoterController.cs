@@ -14,16 +14,18 @@ namespace OnlineVotingSystem.Controllers
     public class VoterController : Controller
     {
         OnlineVotingSystemEntities db = new OnlineVotingSystemEntities();
+
         // GET: Voter
         public ActionResult Index()
         {
             var voters = db.Voters.ToList();
             return View(voters);
         }
+
         public ActionResult StartVote()
         {
             var voters = db.Voters.Where(x => x.IsSelected == false).ToList();
-            foreach(var aVoter in voters)
+            foreach (var aVoter in voters)
             {
                 aVoter.IsSelected = true;
                 //db.SaveChanges();
@@ -32,7 +34,6 @@ namespace OnlineVotingSystem.Controllers
 
             return RedirectToAction("Index", "Voter");
         }
-
 
         public ActionResult EndVote()
         {
@@ -46,7 +47,6 @@ namespace OnlineVotingSystem.Controllers
 
             return RedirectToAction("Index", "Voter");
         }
-        
 
         public ActionResult SendNotification()
         {
@@ -62,26 +62,26 @@ namespace OnlineVotingSystem.Controllers
             //**************************************************************
             //FOR SENDING EMAIL
             //**************************************************************
-          
+
             foreach (var voterObject in voters)
             {
                 voterObject.UniqueIdentification = Guid.NewGuid();
 
                 string url = Url.Action("Index", "VotingPanel", new System.Web.Routing.RouteValueDictionary(new { id = voterObject.UniqueIdentification }), "http", Request.Url.Host);
 
-                var fromEmail = new MailAddress("bcs24batch@logicbd.org", "Online Voting!!");
+                var fromEmail = new MailAddress("testmail@testbd.org", "Online Voting 2019!!");
                 var toEmail = new MailAddress(voterObject.Email);
                 var fromEmailPassword = "********";
-                string subject = "Executive Committee Election of 24 th BCS Association 2019";
+                string subject = "Online Voting 2019";
 
-                string body = "<br/><br/>Executive Committee Election of 24 th BCS (Admin) Association 2019" +
+                string body = "<br/><br/>Online Voting 2019" +
                     "<br/><br/>Welcome to Online Voting System. To cast your vote online please click on the link below. " +
-                    " <br/><br/> Link: <a href='" + url + "'>" + url + "</a> " +
+                    "<br/><br/> Link: <a href='" + url + "'>" + url + "</a> " +
                     "<br/><br/>If you have any problem in accessing the link please contact.";
 
                 var smtp = new SmtpClient
                 {
-                    Host = "logicbd.org",
+                    Host = "testbd.org",
                     Port = 587,
                     EnableSsl = false,
                     DeliveryMethod = SmtpDeliveryMethod.Network,
@@ -95,17 +95,17 @@ namespace OnlineVotingSystem.Controllers
                     Body = body,
                     IsBodyHtml = true
                 })
-                    try
-                    {
-                        smtp.Send(message);
-                        voterObject.IsMailSent = true;
-                        db.SaveChanges();
-                        TempData["Message"] = "Notification Sent Successfully.";
-                    }
-                    catch (Exception ex)
-                    {
-                        TempData["Message"] = "Sending Mail Notification Failed";
-                    }
+                try
+                {
+                    smtp.Send(message);
+                    voterObject.IsMailSent = true;
+                    db.SaveChanges();
+                    TempData["Message"] = "Notification Sent Successfully.";
+                }
+                catch (Exception ex)
+                {
+                    TempData["Message"] = "Sending Mail Notification Failed";
+                }
 
                 //**************************************************************
                 //FOR SENDING SMS
@@ -115,7 +115,7 @@ namespace OnlineVotingSystem.Controllers
                 //HttpWebResponse response = null;
                 //try
                 //{
-                //    string smsText = "Executive Committee Election of 24 th BCS (Admin) Association 2019 \r\n" +
+                //    string smsText = "Online Voting 2019\r\n" +
                 //        "Welcome to Online Voting System. To cast your vote online please click on the link below. \r\n " +
                 //        "Link: " + url + "\r\n " +
                 //        "If you have any problem in accessing the link please visit your email to find this link.";
@@ -151,6 +151,6 @@ namespace OnlineVotingSystem.Controllers
             //**************************************************************
 
             return RedirectToAction("Index", "Voter");
-         }
+        }
     }
 }

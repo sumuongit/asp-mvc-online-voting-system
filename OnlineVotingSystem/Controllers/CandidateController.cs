@@ -13,6 +13,7 @@ namespace OnlineVotingSystem.Controllers
     public class CandidateController : Controller
     {
         OnlineVotingSystemEntities db = new OnlineVotingSystemEntities();
+
         // GET: Candidate
         public ActionResult Index()
         {

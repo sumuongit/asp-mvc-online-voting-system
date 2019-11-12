@@ -45,21 +45,3 @@
     </div>
 </div>
 
-
-@*@model OnlineVotingSystem.Models.ImportExcelFile
-
-    @{
-        ViewBag.Title = "Import Voter Information from Excel File";
-    }
-
-    <h2>Import Voter Information from Excel File to Database</h2>
-
-    <div>
-        <h3>@ViewBag.Result</h3>
-        @using (Html.BeginForm("Index", "Import", FormMethod.Post, new { enctype = "multipart/form-data" }))
-        {
-            @Html.TextBoxFor(m => m.file, new { type = "file" })<br />
-            <button id="submitButton" class="btn btn-danger" type="submit">Import Voter Information</button>
-            @Html.ValidationMessageFor(model => model.file)
-        }
-    </div>*@

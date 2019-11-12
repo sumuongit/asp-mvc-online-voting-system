@@ -11,11 +11,11 @@ namespace OnlineVotingSystem.Controllers
     public class ResultController : Controller
     {
         OnlineVotingSystemEntities db = new OnlineVotingSystemEntities();
+
         // GET: Result
         public ActionResult Index()
         {
             VoteCastingInformationViewModel vm = new VoteCastingInformationViewModel();
-
             OnlineVotingSystemEntities db = new OnlineVotingSystemEntities();
             // GET: CandidatePosition
              vm.VoteCastingPanelViewModel = (from cp in db.CandidatePositions
@@ -27,81 +27,24 @@ namespace OnlineVotingSystem.Controllers
                                             {
                                                 Position = p,
                                                 Candidate = c                                                
-                                            }).ToList();
-
-            //var obj = (from c in db.Candidates
-            //                              join vc in db.VoteCastingInformations
-            //                              on c.CandidateId equals vc.CandidateId
-            //                              group new { c, vc} by new { vc.CandidateId } into v
-            //                              select new 
-            //                              {
-            //                                  CandidateId = v.Key.CandidateId,
-            //                                  Vote = v.Count()                                              
-            //                              }).ToList();
-
-            //var obj = (from c in db.Candidates
-            //            join vc in db.VoteCastingInformations
-            //            on c.CandidateId equals vc.CandidateId
-            //            group vc by c.CandidateId into v
-            //            select new { CandidateId = v.Key, Vote = v.Count() }).ToList();
-
-            //////vm.CandidateVoterViewModel = (from c in db.Candidates
-            //////           join vc in db.VoteCastingInformations
-            //////           on c.CandidateId equals vc.CandidateId into v
-            //////           from vco in v.DefaultIfEmpty()
-            //////           group vco by c.CandidateId into g
-            //////           select new CandidateVoterViewModel
-            //////           {
-            //////               CandidateId = g.Key,
-            //////               VoteCount = g.Count(t=>t.VoterId != null)
-            //////           }).ToList();
-
-
-
-            //vm.CandidateVoterViewModel = (from p in db.Positions
-            //                              join c in db.Candidates
-            //                              on p.PositionId equals c.CandidateId //into pc
-            //                            //  from pco in pc.DefaultIfEmpty()
-            //                              join vc in db.VoteCastingInformations
-            //                              on c.CandidateId equals vc.CandidateId //into cv
-            //                              //from vco in cv.DefaultIfEmpty()
-            //                              //group vco by c.CandidateId into g
-            //                              //// group new { c, vc} by new { vc.CandidateId } into v
-            //                              group new { vc.PositionId, vc.CandidateId, vc.VoterId }
-            //                              by new { p.PositionName, c.Name, p.PositionId } into g
-            //                              //orderby g.Key..ShortName, g.Key.JobName
-            //                              orderby g.Key.PositionId
-            //                              select new CandidateVoterViewModel
-            //                              {
-            //                                  PositionName = g.Key.PositionName,
-            //                                  CandidateName = g.Key.Name,
-            //                                  //CandidateId = g.Key,
-            //                                  VoteCount = g.Count(t => t.VoterId != null)
-            //                              }).ToList();
-
+                                            }).ToList();            
+           
             vm.CandidateVoterViewModel = (from vc in db.VoteCastingInformations
                                           join p in db.Positions
-                                          on vc.PositionId equals p.PositionId //into pc
-                                                                               //  from pco in pc.DefaultIfEmpty()
+                                          on vc.PositionId equals p.PositionId                                                                                
                                           join c in db.Candidates
-                                          on vc.CandidateId equals c.CandidateId //into cv
-                                          //from vco in cv.DefaultIfEmpty()
-                                          //group vco by c.CandidateId into g
-                                          //// group new { c, vc} by new { vc.CandidateId } into v
+                                          on vc.CandidateId equals c.CandidateId 
                                           group new { vc.PositionId, vc.CandidateId, vc.VoterId }
-                                          by new { p.PositionName, c.Name, p.PositionId, vc.Candidate, vc.Position } into g
-                                          //orderby g.Key
-
+                                          by new { p.PositionName, c.Name, p.PositionId, vc.Candidate, vc.Position } into g                                        
                                           orderby g.Key.PositionId
                                           select new CandidateVoterViewModel
                                           {
                                               Position = g.Key.Position,
                                               Candidate = g.Key.Candidate,
                                               PositionName = g.Key.PositionName,
-                                              CandidateName = g.Key.Name,
-                                              //CandidateId = g.Key,
+                                              CandidateName = g.Key.Name,                                            
                                               VoteCount = g.Count(t => t.VoterId != null)
-                                          }).ToList(); //.OrderByDescending(x => x.VoteCount).ToList();//..ToList();
+                                          }).ToList();
 
             vm.Voters = (from v in db.Voters
                         where v.IsCommittedVote == false
